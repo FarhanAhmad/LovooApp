@@ -2,8 +2,8 @@ package com.black.lovooapp.di
 
 import android.app.Application
 import android.content.Context
-import com.black.lovooapp.domain.INetworkSource
-import com.black.lovooapp.domain.NetworkDataSourceImpl
+import com.black.lovooapp.domain.data.remote.INetworkSource
+import com.black.lovooapp.domain.data.remote.NetworkDataSourceImpl
 import okhttp3.OkHttpClient
 import org.junit.Test
 import org.koin.dsl.module.module

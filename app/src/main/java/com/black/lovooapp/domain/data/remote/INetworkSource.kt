@@ -1,4 +1,4 @@
-package com.black.lovooapp.domain
+package com.black.lovooapp.domain.data.remote
 
 import com.black.lovooapp.domain.model.LovooRoomDTO
 

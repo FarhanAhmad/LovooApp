@@ -1,5 +1,7 @@
 package com.black.lovooapp.domain
 
+import com.black.lovooapp.domain.data.remote.INetworkSource
+import com.black.lovooapp.domain.data.remote.NetworkDataSourceImpl
 import com.black.lovooapp.domain.model.LovooRoomDTO
 import kotlinx.coroutines.test.runBlockingTest
 import org.junit.Before

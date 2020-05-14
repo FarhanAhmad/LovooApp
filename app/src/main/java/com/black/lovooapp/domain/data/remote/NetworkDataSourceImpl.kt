@@ -1,6 +1,7 @@
-package com.black.lovooapp.domain
+package com.black.lovooapp.domain.data.remote
 
 import com.black.lovooapp.common.AppConstants
+import com.black.lovooapp.domain.data.remote.INetworkSource
 import com.black.lovooapp.domain.model.LovooRoomDTO
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
@@ -11,7 +12,8 @@ import okhttp3.Request
 /**
  * Created by farhanahmad on 14/5/20.
  */
-class NetworkDataSourceImpl(private val httpClient: OkHttpClient) : INetworkSource {
+class NetworkDataSourceImpl(private val httpClient: OkHttpClient) :
+        INetworkSource {
 
     override suspend fun getRooms(): List<LovooRoomDTO> {
 
