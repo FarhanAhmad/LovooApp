@@ -1,7 +1,7 @@
 package com.black.lovooapp.domain.data.remote
 
+import com.black.lovooapp.BuildConfig
 import com.black.lovooapp.common.AppConstants
-import com.black.lovooapp.domain.data.remote.INetworkSource
 import com.black.lovooapp.domain.model.LovooRoomDTO
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
@@ -17,7 +17,7 @@ class NetworkDataSourceImpl(private val httpClient: OkHttpClient) :
 
     override suspend fun getRooms(): List<LovooRoomDTO> {
 
-        val creds = Credentials.basic("lovooTrialUser", "lovoo#2018")
+        val creds = Credentials.basic(BuildConfig.USERNAME, BuildConfig.PASSWORD)
 
         val request = Request.Builder()
                 .url(AppConstants.URL)
