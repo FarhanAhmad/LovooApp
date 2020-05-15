@@ -5,9 +5,11 @@ import android.content.Context
 import com.black.lovooapp.domain.data.remote.INetworkSource
 import com.black.lovooapp.domain.data.remote.NetworkDataSourceImpl
 import okhttp3.OkHttpClient
+import org.junit.After
 import org.junit.Test
 import org.koin.dsl.module.module
 import org.koin.standalone.StandAloneContext.startKoin
+import org.koin.standalone.StandAloneContext.stopKoin
 import org.koin.standalone.get
 import org.koin.test.KoinTest
 import org.koin.test.checkModules
@@ -57,5 +59,10 @@ class DITest : KoinTest {
 
         assert(networkSource != null)
 
+    }
+
+    @After
+    fun tearDown(){
+        stopKoin()
     }
 }
