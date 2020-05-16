@@ -4,8 +4,12 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.black.lovooapp.databinding.FragRoomListBinding
@@ -33,11 +37,57 @@ class RoomListFragment : Fragment() {
         fragBinding.rvRoomList.apply {
             adapter = RoomListAdapter()
             layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
+            addItemDecoration(DividerItemDecoration(context, DividerItemDecoration.VERTICAL))
         }
 
         fragBinding.viewModel = viewModel
 
+        observeFilterLiveData()
+        handleClickListeners()
+
         return fragBinding.root
+    }
+
+    private fun observeFilterLiveData() {
+        viewModel.roomDepartments.observe(viewLifecycleOwner, Observer { depArray ->
+            val adapter = ArrayAdapter(fragBinding.spTypeFilter.context, android.R.layout.simple_spinner_item, depArray)
+            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+            fragBinding.spDepartmentFilter.adapter = adapter
+        })
+        viewModel.roomTypes.observe(viewLifecycleOwner, Observer { typesArray ->
+            val adapter = ArrayAdapter(fragBinding.spTypeFilter.context, android.R.layout.simple_spinner_item, typesArray)
+            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+            fragBinding.spTypeFilter.adapter = adapter
+        })
+    }
+
+    private fun handleClickListeners() {
+        fragBinding.spTypeFilter.onItemSelectedListener = object :
+                AdapterView.OnItemSelectedListener {
+            override fun onNothingSelected(p0: AdapterView<*>?) {
+            }
+
+            override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
+                viewModel.applyFilter(FilterType.RoomType, fragBinding.spTypeFilter.selectedItem.toString())
+            }
+
+        }
+
+        fragBinding.spDepartmentFilter.onItemSelectedListener = object :
+                AdapterView.OnItemSelectedListener {
+            override fun onNothingSelected(p0: AdapterView<*>?) {
+            }
+
+            override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
+                viewModel.applyFilter(FilterType.RoomDepartment, fragBinding.spDepartmentFilter.selectedItem.toString())
+            }
+
+        }
+
+        fragBinding.labelClearFilter.setOnClickListener {
+            fragBinding.spDepartmentFilter.setSelection(0)
+            fragBinding.spTypeFilter.setSelection(0)
+        }
     }
 
 }
