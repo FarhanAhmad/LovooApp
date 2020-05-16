@@ -3,12 +3,13 @@ package com.black.lovooapp.presentation.viewmodel
 import androidx.databinding.ObservableArrayList
 import androidx.databinding.ObservableBoolean
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import com.black.lovooapp.domain.IAppRepository
 import com.black.lovooapp.domain.usecase.GetRoomsUseCase
 import com.black.lovooapp.presentation.LovooRoom
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 /**
  * Created by farhanahmad on 15/5/20.
@@ -30,13 +31,15 @@ class RoomsListViewModel(private val appRepository: IAppRepository) : ViewModel(
     private fun loadData() {
         isLoading.set(true)
 
-        viewModelScope.launch {
+        viewModelScope.launch(Dispatchers.IO) {
             val getRoomsUseCase = GetRoomsUseCase(appRepository)
 
             val list = getRoomsUseCase.execute()
 
-            roomList.clear()
-            roomList.addAll(list)
+            launch(Dispatchers.Main) {
+                roomList.clear()
+                roomList.addAll(list)
+            }
 
             isLoading.set(false)
         }

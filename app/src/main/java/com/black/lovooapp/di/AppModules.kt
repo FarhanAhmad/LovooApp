@@ -1,5 +1,7 @@
 package com.black.lovooapp.di
 
+import com.black.lovooapp.BuildConfig
+import com.black.lovooapp.common.BasicAuthInterceptor
 import com.black.lovooapp.domain.AppRepository
 import com.black.lovooapp.domain.IAppRepository
 import com.black.lovooapp.domain.data.remote.INetworkSource
@@ -12,7 +14,11 @@ import org.koin.dsl.module.module
  */
 
 private val utilModule = module {
-    single { OkHttpClient() }
+    single {
+        OkHttpClient().newBuilder()
+                .addInterceptor(BasicAuthInterceptor(BuildConfig.USERNAME, BuildConfig.PASSWORD))
+                .build()
+    }
 }
 private val dataModule = module {
     single<INetworkSource> { NetworkDataSourceImpl(get()) }

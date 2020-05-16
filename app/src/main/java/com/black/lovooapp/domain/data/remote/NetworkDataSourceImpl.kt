@@ -1,11 +1,10 @@
 package com.black.lovooapp.domain.data.remote
 
-import com.black.lovooapp.BuildConfig
 import com.black.lovooapp.common.AppConstants
+import com.black.lovooapp.common.Logger
 import com.black.lovooapp.domain.model.LovooRoomDTO
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
-import okhttp3.Credentials
 import okhttp3.OkHttpClient
 import okhttp3.Request
 
@@ -15,23 +14,25 @@ import okhttp3.Request
 class NetworkDataSourceImpl(private val httpClient: OkHttpClient) :
         INetworkSource {
 
-    override suspend fun getRooms(): List<LovooRoomDTO> {
+    companion object {
+        val TAG = "NetworkDataSource"
+    }
 
-        val creds = Credentials.basic(BuildConfig.USERNAME, BuildConfig.PASSWORD)
+    override suspend fun getRooms(): List<LovooRoomDTO> {
 
         val request = Request.Builder()
                 .url(AppConstants.URL)
-                .header("Authorization", creds)
                 .build()
 
         val response = httpClient.newCall(request).execute()
-
+        Logger.e(TAG, "ResponseCode:${response.code}")
         if (response.isSuccessful) {
             val responseStr = response.body?.string()
 
             val type = object : TypeToken<ArrayList<LovooRoomDTO>>() {}.type
             return Gson().fromJson(responseStr, type)
         } else {
+            Logger.e(TAG, response.message)
             //TODO: Error handling
         }
 

@@ -6,6 +6,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.black.lovooapp.databinding.FragRoomListBinding
 import com.black.lovooapp.presentation.viewmodel.RoomListViewModelFactory
 import com.black.lovooapp.presentation.viewmodel.RoomsListViewModel
@@ -30,7 +32,10 @@ class RoomListFragment : Fragment() {
 
         fragBinding.rvRoomList.apply {
             adapter = RoomListAdapter()
+            layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
         }
+
+        fragBinding.viewModel = viewModel
 
         return fragBinding.root
     }
