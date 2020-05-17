@@ -11,6 +11,9 @@ PASSWORD="XXXX"
 Clean architecture with MVVM pattern.
 
 # Components used:
+- databinding to remove boiler plate code
+- live data for updating UI from View Model
+- Coroutines for background thread execution
 - RoomDB for local data persistance
 - OkHttp3 for remote data 
 - Repository Pattern
