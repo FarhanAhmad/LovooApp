@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+
+    <data>
+
+        <variable
+            name="obj"
+            type="com.black.lovooapp.presentation.model.LovooRoomBookings" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="12dp">
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tvBookingDate"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@{obj.bookingDate}"
+            app:layout_constraintEnd_toStartOf="@+id/tvBookingStartTime"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Date" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tvBookingStartTime"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@{obj.bookingStartTime}"
+            app:layout_constraintEnd_toStartOf="@+id/tvBookingEndTime"
+            app:layout_constraintStart_toEndOf="@+id/tvBookingDate"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="StartTime" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tvBookingEndTime"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@{obj.bookingEndTime}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/tvBookingStartTime"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="EndTime" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

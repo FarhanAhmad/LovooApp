@@ -5,5 +5,7 @@ package com.black.lovooapp.common
  */
 object AppConstants{
 
-    val URL = "https://europe-west1-lv-trialwork.cloudfunctions.net/lovooOffice"
+    const val DB_VERSION = 1
+    const val DB_NAME = "lovoodb"
+    const val URL = "https://europe-west1-lv-trialwork.cloudfunctions.net/lovooOffice"
 }

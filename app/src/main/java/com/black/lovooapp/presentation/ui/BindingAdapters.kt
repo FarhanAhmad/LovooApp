@@ -1,5 +1,6 @@
 package com.black.lovooapp.presentation.ui
 
+import android.view.View
 import android.widget.ImageView
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView

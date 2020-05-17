@@ -8,7 +8,7 @@ import kotlinx.android.parcel.Parcelize
  * Created by farhanahmad on 14/5/20.
  */
 @Parcelize
-data class LovooRoom(val id: String, val name: String, val department: String, val type: String, val roomFact: LovooRoomFact? = null) :
+data class LovooRoom(val id: String, val name: String, val department: String, val type: String, val roomFact: LovooRoomFact? = null, val roomNumber: String = "") :
         BaseModel(), Parcelable {
 
     override fun isValid(): Boolean {

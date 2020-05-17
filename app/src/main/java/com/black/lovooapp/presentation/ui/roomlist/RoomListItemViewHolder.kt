@@ -17,8 +17,7 @@ class RoomListItemViewHolder(private val clickListener: IRoomClickListener? = nu
             viewBinding.executePendingBindings()
         }
         viewBinding.root.setOnClickListener {
-            if(obj.roomFact != null)
-                clickListener?.onRoomClick(obj)
+            clickListener?.onRoomClick(obj)
         }
     }
 

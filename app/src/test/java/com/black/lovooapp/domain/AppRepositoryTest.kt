@@ -1,5 +1,7 @@
 package com.black.lovooapp.domain
 
+import com.black.lovooapp.domain.data.local.ILocalSource
+import com.black.lovooapp.domain.data.local.LocalDataSource
 import com.black.lovooapp.domain.data.remote.INetworkSource
 import com.black.lovooapp.domain.data.remote.NetworkDataSourceImpl
 import com.black.lovooapp.domain.model.LovooRoomDTO
@@ -17,6 +19,8 @@ import org.mockito.Mockito
 class AppRepositoryTest {
 
     lateinit var networkSource: INetworkSource
+    lateinit var localSource: ILocalSource
+
     lateinit var appRepository: IAppRepository
 
     val tempList: List<LovooRoomDTO> = arrayListOf()
@@ -24,7 +28,9 @@ class AppRepositoryTest {
     @Before
     fun setUp() {
         networkSource = Mockito.mock(NetworkDataSourceImpl::class.java)
-        appRepository = AppRepository(networkSource)
+        localSource = Mockito.mock(LocalDataSource::class.java)
+
+        appRepository = AppRepository(localSource, networkSource)
 
     }
 
@@ -75,7 +81,7 @@ class AppRepositoryTest {
     fun testGetRoomsCorrectMapping() = runBlockingTest {
 
         val roomDTOList = arrayListOf<LovooRoomDTO>()
-        roomDTOList.add(LovooRoomDTO("123", "R123","R123"))
+        roomDTOList.add(LovooRoomDTO("123", "R123", "R123"))
 
         Mockito.`when`(networkSource.getRooms()).thenReturn(roomDTOList)
 

@@ -33,7 +33,7 @@ class DITest : KoinTest {
     }
 
     @Test
-    fun testOkHttpClientObj(){
+    fun testOkHttpClientObj() {
         val module = module {
             single { OkHttpClient() }
         }
@@ -62,7 +62,7 @@ class DITest : KoinTest {
     }
 
     @After
-    fun tearDown(){
+    fun tearDown() {
         stopKoin()
     }
 }
