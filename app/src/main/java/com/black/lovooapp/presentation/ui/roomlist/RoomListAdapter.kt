@@ -1,13 +1,14 @@
-package com.black.lovooapp.presentation.ui
+package com.black.lovooapp.presentation.ui.roomlist
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import com.black.lovooapp.databinding.ItemRoomListBinding
-import com.black.lovooapp.presentation.LovooRoom
+import com.black.lovooapp.presentation.model.LovooRoom
 
-class RoomListAdapter : ListAdapter<LovooRoom, RoomListItemViewHolder>(DIFF_CALLBACK) {
+class RoomListAdapter(private val roomClickListener: IRoomClickListener) :
+        ListAdapter<LovooRoom, RoomListItemViewHolder>(DIFF_CALLBACK) {
 
     companion object {
         val DIFF_CALLBACK = object : DiffUtil.ItemCallback<LovooRoom>() {
@@ -22,9 +23,9 @@ class RoomListAdapter : ListAdapter<LovooRoom, RoomListItemViewHolder>(DIFF_CALL
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RoomListItemViewHolder {
-        return RoomListItemViewHolder(
+        return RoomListItemViewHolder(roomClickListener,
                 ItemRoomListBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-                                     )
+                                                                                                    )
     }
 
     override fun onBindViewHolder(holder: RoomListItemViewHolder, position: Int) {

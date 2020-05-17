@@ -1,7 +1,7 @@
 package com.black.lovooapp.domain.usecase
 
 import com.black.lovooapp.domain.IAppRepository
-import com.black.lovooapp.presentation.LovooRoom
+import com.black.lovooapp.presentation.model.LovooRoom
 
 /**
  * Created by farhanahmad on 15/5/20.

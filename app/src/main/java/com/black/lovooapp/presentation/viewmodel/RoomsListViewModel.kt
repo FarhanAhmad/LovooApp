@@ -7,7 +7,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.black.lovooapp.domain.IAppRepository
 import com.black.lovooapp.domain.usecase.GetRoomsUseCase
-import com.black.lovooapp.presentation.LovooRoom
+import com.black.lovooapp.presentation.model.LovooRoom
 import com.black.lovooapp.presentation.ui.FilterType
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch

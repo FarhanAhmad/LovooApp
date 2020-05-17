@@ -1,5 +1,6 @@
-package com.black.lovooapp.presentation.ui
+package com.black.lovooapp.presentation.ui.roomlist
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -13,6 +14,9 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.black.lovooapp.databinding.FragRoomListBinding
+import com.black.lovooapp.presentation.model.LovooRoom
+import com.black.lovooapp.presentation.ui.FilterType
+import com.black.lovooapp.presentation.ui.IActivityInteractor
 import com.black.lovooapp.presentation.viewmodel.RoomListViewModelFactory
 import com.black.lovooapp.presentation.viewmodel.RoomsListViewModel
 import org.koin.android.ext.android.get
@@ -20,13 +24,22 @@ import org.koin.android.ext.android.get
 /**
  * Created by farhanahmad on 16/5/20.
  */
-class RoomListFragment : Fragment() {
+class RoomListFragment : Fragment(),
+        IRoomClickListener {
 
     lateinit var fragBinding: FragRoomListBinding
     lateinit var viewModel: RoomsListViewModel
 
+    var activityInteractor: IActivityInteractor? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+    }
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        if (context is IActivityInteractor)
+            activityInteractor = context
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -35,7 +48,7 @@ class RoomListFragment : Fragment() {
         viewModel = ViewModelProvider(this, RoomListViewModelFactory(get())).get(RoomsListViewModel::class.java)
 
         fragBinding.rvRoomList.apply {
-            adapter = RoomListAdapter()
+            adapter = RoomListAdapter(this@RoomListFragment)
             layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
             addItemDecoration(DividerItemDecoration(context, DividerItemDecoration.VERTICAL))
         }
@@ -90,4 +103,7 @@ class RoomListFragment : Fragment() {
         }
     }
 
+    override fun onRoomClick(item: LovooRoom) {
+        activityInteractor?.showRoomDetails(item)
+    }
 }
